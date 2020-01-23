@@ -74,3 +74,31 @@ const combinedNames = combine('Max', 'Anna')
 
 console.log(combinedAges);
 console.log(combinedNames);
+
+
+// ========== Literal Types ==========
+function combine1(
+    input1: number | string,
+    input2: number | string,
+    resultConverstion: 'as-number' | 'as-text') {
+    let combination;
+    if (typeof input1 === 'number' && typeof input2 === 'number' || resultConverstion === 'as-number') {
+        combination = +input1 + +input2;
+    } else {
+        combination = input1.toString() + input2.toString();
+    }
+    return combination;
+}
+
+const combinedAges1 = combine1(53, '21', 'as-number');
+const combinedNames1 = combine1('Don', 'Andi', 'as-text');
+
+
+// ========== Type Aliases ==========
+// custom types commonly used with union types
+// cannot use a predefined word in js as a type alias (like 'Date')
+type Combinable = number | string;
+
+// can also provide an alias to a more complex object type
+type User = { name: string; age: number };
+const u1: User = { name: 'Max', age: 30 };
