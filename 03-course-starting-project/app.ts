@@ -102,3 +102,22 @@ type Combinable = number | string;
 // can also provide an alias to a more complex object type
 type User = { name: string; age: number };
 const u1: User = { name: 'Max', age: 30 };
+
+
+// ========== Function Return Types and 'void' ==========
+function add1(n1: number, n2: number) {
+    return n1 + n2;
+}
+
+// don't set the type unless there is an explicit reason for it. Let ts infer the type
+
+// in the case of a function that doesn't return anything:
+function printResult(num: number) {
+    console.log('Result: ' + num);
+}
+
+printResult(add(5,12));
+
+// if we tried to console log printResult(add(5,12)), then we would get 'undefined' because we are trying to log something that does not exist
+// undefined is also a type in ts (different from the type 'void' and not used very often)
+
