@@ -121,3 +121,45 @@ printResult(add(5,12));
 // if we tried to console log printResult(add(5,12)), then we would get 'undefined' because we are trying to log something that does not exist
 // undefined is also a type in ts (different from the type 'void' and not used very often)
 
+// ========== Functions as Types ==========
+// let combineValues;
+// combineValues = add1;
+// console.log(combineValues(8,8));
+
+// note: if we were to reassign combineValues to a number, we would not get an error upon compiling, but we would get a run-time error
+
+// How to create a function type:
+let combineValues: (a: number, b: number) => number;
+// 'combineValues should accept two numbers and produce a result that is a number
+combineValues = add1;
+// combineValues = printResult; --> the compiler would show an error
+
+
+// ========== Function Types and Callbacks ==========
+function addAndHandle(n1: number, n2: number, cb: (num: number) => void) {
+    const result = n1 + n2;
+    cb(result);
+}
+
+addAndHandle(10, 20, (result) => console.log(result));
+
+
+// ========== The 'unknown' type ==========
+// can store value of any type without getting errors
+let userInput: unknown;
+
+// 'any' is the most flexible type in ts
+// 'uknown' is more restrictive. We have to check the type that is currently stored before setting a variable with a fixed type equal to a variable of type 'unkown'
+// 'unknown' is better than 'any'
+
+
+// ========== The 'never' type ==========
+function generateError(message: string, code: number): never {
+    throw{ message: message, errorCode: code ;}
+}
+
+// generateError('An error occurred!', 500); --> this works, but it throws an error that stops the program
+
+// The return type of this function is not just void--it never returns anything, so the return type is 'never'
+// ts will infer the function return type is 'void' but you can be more explicit about the intent of your code by assigning the return type as 'never'
+
